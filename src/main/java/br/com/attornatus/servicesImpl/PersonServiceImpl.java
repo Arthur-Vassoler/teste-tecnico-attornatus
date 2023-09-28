@@ -30,6 +30,9 @@ public class PersonServiceImpl implements PersonService {
   @Override
   @Transactional
   public PersonResponseDto save(PersonRequestDto personRequestDto) {
+    if (personRequestDto.getNome() == null || personRequestDto.getDataNascimento() == null)
+      throw new IllegalArgumentException("Nome e(ou) data de nascimento não podem ser nulos.");
+
     PersonEntity person = new PersonEntity();
     person.setName(personRequestDto.getNome());
     person.setDateBirth(LocalDate.parse(personRequestDto.getDataNascimento()));
@@ -64,7 +67,10 @@ public class PersonServiceImpl implements PersonService {
   public PersonResponseEntityDto findById(Long id) {
     Optional<PersonEntity> person = personRepository.findById(id);
 
-    return person.map(this::convertToPersonResponseEntityDto).orElse(null);
+    if (person.isPresent())
+      return convertToPersonResponseEntityDto(person.get());
+    else
+      throw new EntityNotFoundException("Pessoa não encontrada com o ID: " + id);
   }
 
   @Override
