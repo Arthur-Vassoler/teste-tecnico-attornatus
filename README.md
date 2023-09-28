@@ -4,6 +4,9 @@ Esta é uma API Spring Boot desenvolvida como parte do teste técnico da Attorna
 A API fornece funcionalidades essenciais para a aplicação e pode ser
 facilmente executada usando o Docker Compose.
 
+## Contato
+- Email: a.h.vassoler@gmail.com
+
 ## Pré-requisitos
 
 Antes de começar, certifique-se de que você tenha as seguintes ferramentas instaladas em sua máquina:
